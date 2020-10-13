@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MONSTER GAME</title>
+    <!-- STYLE && FONTS -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div id="title">
+        <h1>Monster Game</h1>
+      </div>
+
+      <!-- WRAPPER -->
+      <div id="wrapper">
+        <div class="box" id="player">
+          <h3 class="title">YOU</h3>
+          <div class="prog-wrapper">
+            <div class="back-progress"></div>
+            <div class="progress green" :style="{width:firstPlayer + '%'}">
+              {{ firstPlayer }}
+            </div>
+          </div>
+        </div>
+
+        <div class="box" id="monster">
+          <h3 class="title">MONSTER</h3>
+          <div class="prog-wrapper">
+            <div class="back-progress"></div>
+            <div class="progress red" :style="{width:monsterPlayer + '%'}">
+              {{ monsterPlayer }}
+            </div>
+          </div>
+        </div>
+        <br />
+        <hr />
+        <!-- ACTIONS -->
+
+        <!-- START GAME -->
+        <div class="actions actions-center" v-if="!gameIsRunning">
+          <a class="btn" @click="gameStart()">START GAME</a>
+        </div>
+
+        <!-- GAME BUTTONS -->
+        <div class="actions" v-else>
+          <a class="btn" @click="attack()">Attack</a>
+          <a class="btn" @click="specialAttack()">Special Attack</a>
+          <a class="btn" @click="heal()">HEAL</a>
+          <a class="btn" @click="giveUp()">GIVE UP</a>
+        </div>
+        <hr />
+        <ul v-if="gameIsRunning">
+          <li
+            v-for="message in messages"
+            :class="{'green-text':message.isPlayer,'red-text':!message.isPlayer}"
+          >
+            {{ message.text }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VUE & LOAD -->
+    <script src="js/vue.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
